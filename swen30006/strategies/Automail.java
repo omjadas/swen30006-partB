@@ -1,7 +1,11 @@
 package strategies;
 
 import automail.IMailDelivery;
+import robot.Big;
+import robot.Careful;
 import robot.Robot;
+import robot.Standard;
+import robot.Weak;
 
 public class Automail {
 	      
@@ -20,10 +24,11 @@ public class Automail {
     	boolean strong = true; // Can handle any weight that arrives at the building
     	
     	/** Initialize robots */
-    	robot = new Robot[3];
-    	robot[0] = new Robot(delivery, mailPool, weak);
-    	robot[1] = new Robot(delivery, mailPool, strong);
-    	robot[2] = new Robot(delivery, mailPool, strong);
+    	robot = new Robot[4];
+    	robot[0] = new Big(delivery, mailPool);
+    	robot[1] = new Careful(delivery, mailPool);
+    	robot[2] = new Weak(delivery, mailPool);
+    	robot[3] = new Standard(delivery, mailPool);
     }
     
 }

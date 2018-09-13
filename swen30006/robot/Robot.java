@@ -131,7 +131,10 @@ public abstract class Robot {
      * Sets the route for the robot
      */
     private void setRoute() throws ItemTooHeavyException{
-        
+        /** Pop the item from the StorageUnit */
+        deliveryItem = tube.pop();
+        /** Set the destination floor */
+        destination_floor = deliveryItem.getDestFloor();
     }
 
     /**

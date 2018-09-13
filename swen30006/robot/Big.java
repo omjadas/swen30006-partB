@@ -7,17 +7,9 @@ import strategies.IMailPool;
 
 public class Big extends Robot{
 
-	public Big(IMailDelivery delivery, IMailPool mailPool, boolean strong) {
-		super(delivery, mailPool, strong, 6);
+	public Big(IMailDelivery delivery, IMailPool mailPool) {
+		super(delivery, mailPool, true, 6);
 		// TODO Auto-generated constructor stub
 	}
 	
-	/**
-     * Sets the route for the robot
-     */
-    private void setRoute() throws ItemTooHeavyException{
-        
-    }
-
-
 }
