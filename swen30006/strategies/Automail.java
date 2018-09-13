@@ -1,7 +1,7 @@
 package strategies;
 
 import automail.IMailDelivery;
-import automail.Robot;
+import robot.Robot;
 
 public class Automail {
 	      

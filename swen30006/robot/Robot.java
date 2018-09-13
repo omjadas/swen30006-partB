@@ -1,4 +1,4 @@
-package automail;
+package robot;
 
 import exceptions.ExcessiveDeliveryException;
 import exceptions.ItemTooHeavyException;
@@ -7,10 +7,16 @@ import strategies.IMailPool;
 import java.util.Map;
 import java.util.TreeMap;
 
+import automail.Building;
+import automail.Clock;
+import automail.IMailDelivery;
+import automail.MailItem;
+import automail.StorageTube;
+
 /**
  * The robot delivers mail!
  */
-public class Robot {
+public abstract class Robot {
 
 	StorageTube tube;
     IMailDelivery delivery;
@@ -18,14 +24,14 @@ public class Robot {
     /** Possible states the robot can be in */
     public enum RobotState { DELIVERING, WAITING, RETURNING }
     public RobotState current_state;
-    private int current_floor;
-    private int destination_floor;
+    protected int current_floor;
+    protected int destination_floor;
     private IMailPool mailPool;
     private boolean receivedDispatch;
+    
+    protected MailItem deliveryItem;
+    private static int MAX_TAKE;
     private boolean strong;
-    
-    private MailItem deliveryItem;
-    
     private int deliveryCounter;
     
 
@@ -37,7 +43,7 @@ public class Robot {
      * @param mailPool is the source of mail items
      * @param strong is whether the robot can carry heavy items
      */
-    public Robot(IMailDelivery delivery, IMailPool mailPool, boolean strong){
+    public Robot(IMailDelivery delivery, IMailPool mailPool, boolean strong,int MAX_TAKE){
     	id = "R" + hashCode();
         // current_state = RobotState.WAITING;
     	current_state = RobotState.RETURNING;
@@ -48,7 +54,12 @@ public class Robot {
         this.receivedDispatch = false;
         this.strong = strong;
         this.deliveryCounter = 0;
+        this.MAX_TAKE = MAX_TAKE;
     }
+    
+    public static int getMAX_TAKE() {
+		return MAX_TAKE;
+	}
     
     public void dispatch() {
     	receivedDispatch = true;
@@ -120,11 +131,7 @@ public class Robot {
      * Sets the route for the robot
      */
     private void setRoute() throws ItemTooHeavyException{
-        /** Pop the item from the StorageUnit */
-        deliveryItem = tube.pop();
-        if (!strong && deliveryItem.weight > 2000) throw new ItemTooHeavyException(); 
-        /** Set the destination floor */
-        destination_floor = deliveryItem.getDestFloor();
+        
     }
 
     /**
@@ -173,4 +180,7 @@ public class Robot {
 		if (hash == null) { hash = count++; hashMap.put(hash0, hash); }
 		return hash;
 	}
+
+	
+
 }

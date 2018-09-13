@@ -7,9 +7,9 @@ import java.util.function.Consumer;
 
 import automail.MailItem;
 import automail.PriorityMailItem;
-import automail.Robot;
 import automail.StorageTube;
 import exceptions.TubeFullException;
+import robot.Robot;
 import exceptions.FragileItemBrokenException;
 
 public class MyMailPool implements IMailPool {
@@ -46,7 +46,6 @@ public class MyMailPool implements IMailPool {
 	}
 	
 	private LinkedList<Item> pool;
-	private static final int MAX_TAKE = 4;
 	private LinkedList<Robot> robots;
 	private int lightCount;
 
@@ -74,14 +73,14 @@ public class MyMailPool implements IMailPool {
 		StorageTube temp = new StorageTube();
 		try { // Get as many items as available or as fit
 				if (robot.isStrong()) {
-					while(temp.getSize() < MAX_TAKE && !pool.isEmpty() ) {
+					while(temp.getSize() < Robot.getMAX_TAKE() && !pool.isEmpty() ) {
 						Item item = pool.remove();
 						if (!item.heavy) lightCount--;
 						temp.addItem(item.mailItem);
 					}
 				} else {
 					ListIterator<Item> i = pool.listIterator();
-					while(temp.getSize() < MAX_TAKE && lightCount > 0) {
+					while(temp.getSize() < Robot.getMAX_TAKE() && lightCount > 0) {
 						Item item = i.next();
 						if (!item.heavy) {
 							temp.addItem(item.mailItem);
