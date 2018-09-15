@@ -24,11 +24,15 @@ public class Automail {
     	boolean strong = true; // Can handle any weight that arrives at the building
     	
     	/** Initialize robots */
-    	robot = new Robot[4];
+    	robot = new Robot[8];
     	robot[0] = new Big(delivery, mailPool);
     	robot[1] = new Careful(delivery, mailPool);
-    	robot[2] = new Weak(delivery, mailPool);
-    	robot[3] = new Standard(delivery, mailPool);
+    	robot[2] = new Standard(delivery, mailPool);
+    	robot[3] = new Weak(delivery, mailPool);
+    	robot[4] = new Big(delivery, mailPool);
+    	robot[5] = new Careful(delivery, mailPool);
+    	robot[6] = new Standard(delivery, mailPool);
+    	robot[7] = new Weak(delivery, mailPool);
     }
     
 }

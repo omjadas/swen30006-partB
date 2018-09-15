@@ -8,6 +8,8 @@ import automail.MailItem;
 
 
 public class Weak extends Robot {
+	
+	private static int MAX_WEIGHT = 2000;
 
 	public Weak(IMailDelivery delivery, IMailPool mailPool) {
 		super(delivery, mailPool, false, 4);
@@ -17,12 +19,16 @@ public class Weak extends Robot {
 	/**
      * Sets the route for the robot
      */
-    private void setRoute() throws ItemTooHeavyException{
+    protected void setRoute() throws ItemTooHeavyException{
     	/** Pop the item from the StorageUnit */
         deliveryItem = tube.pop();
-        if (deliveryItem.getWeight() > 2000) throw new ItemTooHeavyException(); 
+        if (deliveryItem.getWeight() > MAX_WEIGHT) throw new ItemTooHeavyException(); 
 	    /** Set the destination floor */
 	    destination_floor = deliveryItem.getDestFloor();
+    }
+    
+    public static int getMaxWeight() {
+    	return MAX_WEIGHT;
     }
 
 }

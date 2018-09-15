@@ -15,19 +15,19 @@ public class Careful extends Robot{
     /**
      * Generic function that moves the robot towards the destination
      * @param destination the floor towards which the robot is moving
+     * @throws FragileItemBrokenException 
      */
-    private void moveTowards(int destination) throws FragileItemBrokenException {
+    protected void moveTowards(int destination) throws FragileItemBrokenException {
 	    if(stop) {
 	    	stop = false;
 	    }
 	    else {
-			if(current_floor < destination){
-		        current_floor++;
-		    }
-		    else{
-		        current_floor--;
-		    }
-			stop = true;
+	    	if(current_floor < destination){
+	            current_floor++;
+	        }
+	        else{
+	            current_floor--;
+	        }
 	    }
     }
 

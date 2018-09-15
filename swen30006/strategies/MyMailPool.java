@@ -9,7 +9,9 @@ import automail.MailItem;
 import automail.PriorityMailItem;
 import automail.StorageTube;
 import exceptions.TubeFullException;
+import robot.Careful;
 import robot.Robot;
+import robot.Weak;
 import exceptions.FragileItemBrokenException;
 
 public class MyMailPool implements IMailPool {
@@ -17,13 +19,15 @@ public class MyMailPool implements IMailPool {
 		int priority;
 		int destination;
 		boolean heavy;
+		boolean fragile;
 		MailItem mailItem;
 		// Use stable sort to keep arrival time relative positions
 		
 		public Item(MailItem mailItem) {
 			priority = (mailItem instanceof PriorityMailItem) ? ((PriorityMailItem) mailItem).getPriorityLevel() : 1;
-			heavy = mailItem.getWeight() >= 2000;
+			heavy = mailItem.getWeight() >= Weak.getMaxWeight();
 			destination = mailItem.getDestFloor();
+			fragile = mailItem.getFragile();
 			this.mailItem = mailItem;
 		}
 	}
@@ -45,22 +49,30 @@ public class MyMailPool implements IMailPool {
 		}
 	}
 	
-	private LinkedList<Item> pool;
+	private LinkedList<Item> normalPool;
+	private LinkedList<Item> fragilePool;
 	private LinkedList<Robot> robots;
 	private int lightCount;
 
 	public MyMailPool(){
 		// Start empty
-		pool = new LinkedList<Item>();
+		normalPool = new LinkedList<Item>();
+		fragilePool = new LinkedList<Item>();
 		lightCount = 0;
 		robots = new LinkedList<Robot>();
 	}
 
 	public void addToPool(MailItem mailItem) {
 		Item item = new Item(mailItem);
-		pool.add(item);
-		if (!item.heavy) lightCount++;
-		pool.sort(new ItemComparator());
+		if (item.fragile) {
+			fragilePool.add(item);
+		}else {
+			normalPool.add(item);
+			if (!item.heavy) lightCount++;
+		}
+		
+		normalPool.sort(new ItemComparator());
+		fragilePool.sort(new ItemComparator());
 	}
 	
 	@Override
@@ -70,29 +82,35 @@ public class MyMailPool implements IMailPool {
 	
 	private void fillStorageTube(Robot robot) throws FragileItemBrokenException {
 		StorageTube tube = robot.getTube();
-		StorageTube temp = new StorageTube();
+
+
 		try { // Get as many items as available or as fit
+			
+			if (robot instanceof Careful && fragilePool.size()>0) {
+				tube.addItem(fragilePool.remove().mailItem);
+			}else {
 				if (robot.isStrong()) {
-					while(temp.getSize() < Robot.getMAX_TAKE() && !pool.isEmpty() ) {
-						Item item = pool.remove();
+					while(tube.getSize() < tube.getMaxCapacity() && !normalPool.isEmpty() ) {
+						Item item = normalPool.remove();
 						if (!item.heavy) lightCount--;
-						temp.addItem(item.mailItem);
+						tube.addItem(item.mailItem);
 					}
 				} else {
-					ListIterator<Item> i = pool.listIterator();
-					while(temp.getSize() < Robot.getMAX_TAKE() && lightCount > 0) {
+					ListIterator<Item> i = normalPool.listIterator();
+					while(tube.getSize() < tube.getMaxCapacity() && lightCount > 0) {
 						Item item = i.next();
 						if (!item.heavy) {
-							temp.addItem(item.mailItem);
+							tube.addItem(item.mailItem);
 							i.remove();
 							lightCount--;
 						}
 					}
 				}
-				if (temp.getSize() > 0) {
-					while (!temp.isEmpty()) tube.addItem(temp.pop());
-					robot.dispatch();
-				}
+			}
+
+			if (tube.getSize() > 0) {
+				robot.dispatch();
+			}
 		}
 		catch(TubeFullException e){
 			e.printStackTrace();
