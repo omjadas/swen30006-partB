@@ -9,9 +9,9 @@ import automail.MailItem;
 import automail.PriorityMailItem;
 import automail.StorageTube;
 import exceptions.TubeFullException;
-import robot.Careful;
+import robot.CarefulRobot;
 import robot.Robot;
-import robot.Weak;
+import robot.WeakRobot;
 import exceptions.FragileItemBrokenException;
 
 public class MyMailPool implements IMailPool {
@@ -25,7 +25,7 @@ public class MyMailPool implements IMailPool {
 		
 		public Item(MailItem mailItem) {
 			priority = (mailItem instanceof PriorityMailItem) ? ((PriorityMailItem) mailItem).getPriorityLevel() : 1;
-			heavy = mailItem.getWeight() >= Weak.getMaxWeight();
+			heavy = mailItem.getWeight() >= WeakRobot.getMaxWeight();
 			destination = mailItem.getDestFloor();
 			fragile = mailItem.getFragile();
 			this.mailItem = mailItem;
@@ -86,7 +86,7 @@ public class MyMailPool implements IMailPool {
 
 		try { // Get as many items as available or as fit
 			
-			if (robot instanceof Careful && fragilePool.size()>0) {
+			if (robot instanceof CarefulRobot && fragilePool.size()>0) {
 				tube.addItem(fragilePool.remove().mailItem);
 			}else {
 				if (robot.isStrong()) {

@@ -7,11 +7,11 @@ import strategies.IMailPool;
 import automail.MailItem;
 
 
-public class Weak extends Robot {
+public class WeakRobot extends Robot {
 	
 	private static int MAX_WEIGHT = 2000;
 
-	public Weak(IMailDelivery delivery, IMailPool mailPool) {
+	public WeakRobot(IMailDelivery delivery, IMailPool mailPool) {
 		super(delivery, mailPool, false, 4);
 		// TODO Auto-generated constructor stub
 	}

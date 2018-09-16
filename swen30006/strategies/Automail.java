@@ -1,11 +1,11 @@
 package strategies;
 
 import automail.IMailDelivery;
-import robot.Big;
-import robot.Careful;
+import robot.BigRobot;
+import robot.CarefulRobot;
 import robot.Robot;
-import robot.Standard;
-import robot.Weak;
+import robot.StandardRobot;
+import robot.WeakRobot;
 
 public class Automail {
 	      
@@ -25,14 +25,14 @@ public class Automail {
     	
     	/** Initialize robots */
     	robot = new Robot[8];
-    	robot[0] = new Big(delivery, mailPool);
-    	robot[1] = new Careful(delivery, mailPool);
-    	robot[2] = new Standard(delivery, mailPool);
-    	robot[3] = new Weak(delivery, mailPool);
-    	robot[4] = new Big(delivery, mailPool);
-    	robot[5] = new Careful(delivery, mailPool);
-    	robot[6] = new Standard(delivery, mailPool);
-    	robot[7] = new Weak(delivery, mailPool);
+    	robot[0] = new BigRobot(delivery, mailPool);
+    	robot[1] = new CarefulRobot(delivery, mailPool);
+    	robot[2] = new StandardRobot(delivery, mailPool);
+    	robot[3] = new WeakRobot(delivery, mailPool);
+    	robot[4] = new BigRobot(delivery, mailPool);
+    	robot[5] = new CarefulRobot(delivery, mailPool);
+    	robot[6] = new StandardRobot(delivery, mailPool);
+    	robot[7] = new WeakRobot(delivery, mailPool);
     }
     
 }

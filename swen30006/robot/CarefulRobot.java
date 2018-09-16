@@ -5,9 +5,9 @@ import exceptions.FragileItemBrokenException;
 import exceptions.ItemTooHeavyException;
 import strategies.IMailPool;
 
-public class Careful extends Robot{
+public class CarefulRobot extends Robot{
 	boolean stop = true;
-	public Careful(IMailDelivery delivery, IMailPool mailPool) {
+	public CarefulRobot(IMailDelivery delivery, IMailPool mailPool) {
 		super(delivery, mailPool, true, 3);
 		// TODO Auto-generated constructor stub
 	}
