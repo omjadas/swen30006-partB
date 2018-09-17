@@ -2,7 +2,7 @@ package automail;
 
 import exceptions.FragileItemBrokenException;
 import exceptions.TubeFullException;
-import robot.Robot;
+import robots.Robot;
 
 import java.util.Stack;
 

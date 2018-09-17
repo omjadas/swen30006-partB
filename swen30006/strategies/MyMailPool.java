@@ -9,9 +9,9 @@ import automail.MailItem;
 import automail.PriorityMailItem;
 import automail.StorageTube;
 import exceptions.TubeFullException;
-import robot.CarefulRobot;
-import robot.Robot;
-import robot.WeakRobot;
+import robots.CarefulRobot;
+import robots.Robot;
+import robots.WeakRobot;
 import exceptions.FragileItemBrokenException;
 
 public class MyMailPool implements IMailPool {
