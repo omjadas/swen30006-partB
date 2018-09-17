@@ -36,11 +36,11 @@ public class Simulation {
 		// Default properties
     	automailProperties.setProperty("Robots", "Big,Careful,Standard,Weak");
     	//automailProperties.setProperty("Robots", "Standard");
-    	automailProperties.setProperty("MailPool", "strategies.SimpleMailPool");
+    	automailProperties.setProperty("MailPool", "strategies.MyMailPool");
     	automailProperties.setProperty("Floors", "10");
-    	automailProperties.setProperty("Fragile", "false");
-    	automailProperties.setProperty("Mail_to_Create", "80");
-    	automailProperties.setProperty("Last_Delivery_Time", "100");
+    	automailProperties.setProperty("Fragile", "true");
+    	automailProperties.setProperty("Mail_to_Create", "200");
+    	automailProperties.setProperty("Last_Delivery_Time", "120");
 
     	// Read properties
 		FileReader inStream = null;
