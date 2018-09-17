@@ -30,7 +30,6 @@ public abstract class Robot {
     private boolean receivedDispatch;
     
     protected MailItem deliveryItem;
-    private int MAX_TAKE;
     private boolean strong;
     private int deliveryCounter;
     
