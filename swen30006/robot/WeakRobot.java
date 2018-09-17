@@ -8,11 +8,11 @@ import automail.MailItem;
 
 
 public class WeakRobot extends Robot {
-	
-	private static int MAX_WEIGHT = 2000;
+	private static final int MAX_ITEMS = 6;
+	private static final int MAX_WEIGHT = 2000;
 
 	public WeakRobot(IMailDelivery delivery, IMailPool mailPool) {
-		super(delivery, mailPool, false, 4);
+		super(delivery, mailPool, false, MAX_ITEMS);
 		// TODO Auto-generated constructor stub
 	}
 	

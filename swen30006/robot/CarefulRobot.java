@@ -6,9 +6,10 @@ import exceptions.ItemTooHeavyException;
 import strategies.IMailPool;
 
 public class CarefulRobot extends Robot{
+	private static final int MAX_ITEMS = 3;
 	boolean stop = true;
 	public CarefulRobot(IMailDelivery delivery, IMailPool mailPool) {
-		super(delivery, mailPool, true, 3);
+		super(delivery, mailPool, true, MAX_ITEMS);
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -18,9 +19,11 @@ public class CarefulRobot extends Robot{
      * @throws FragileItemBrokenException 
      */
     protected void moveTowards(int destination) throws FragileItemBrokenException {
-	    if(stop) {
+	    //skips one step
+    	if(stop) {
 	    	stop = false;
 	    }
+    	//make a move on the second step
 	    else {
 	    	if(current_floor < destination){
 	            current_floor++;
