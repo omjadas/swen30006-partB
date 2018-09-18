@@ -35,13 +35,13 @@ public class Simulation {
     public static void main(String[] args) throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException {
     	Properties automailProperties = new Properties();
 		// Default properties
-    	automailProperties.setProperty("Robots", "Big,Careful,Standard,Weak");
-    	//automailProperties.setProperty("Robots", "Standard");
-    	automailProperties.setProperty("MailPool", "strategies.MyMailPool");
+    	// automailProperties.setProperty("Robots", "Big,Careful,Standard,Weak");
+    	automailProperties.setProperty("Robots", "Standard");
+    	automailProperties.setProperty("MailPool", "strategies.SimpleMailPool");
     	automailProperties.setProperty("Floors", "10");
-    	automailProperties.setProperty("Fragile", "true");
-    	automailProperties.setProperty("Mail_to_Create", "200");
-    	automailProperties.setProperty("Last_Delivery_Time", "120");
+    	automailProperties.setProperty("Fragile", "false");
+    	automailProperties.setProperty("Mail_to_Create", "80");
+    	automailProperties.setProperty("Last_Delivery_Time", "100");
 
     	// Read properties
 		FileReader inStream = null;
