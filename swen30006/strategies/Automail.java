@@ -1,11 +1,11 @@
 package strategies;
 
 import automail.IMailDelivery;
-import robot.BigRobot;
-import robot.CarefulRobot;
-import robot.Robot;
-import robot.StandardRobot;
-import robot.WeakRobot;
+import robots.BigRobot;
+import robots.CarefulRobot;
+import robots.Robot;
+import robots.StandardRobot;
+import robots.WeakRobot;
 
 public class Automail {
 	      

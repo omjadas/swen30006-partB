@@ -1,4 +1,4 @@
-package robot;
+package robots;
 
 import automail.IMailDelivery;
 import exceptions.FragileItemBrokenException;
@@ -7,7 +7,7 @@ import strategies.IMailPool;
 
 public class CarefulRobot extends Robot{
 	private static final int MAX_ITEMS = 3;
-	boolean stop = true;
+	private boolean stop = true;
 	public CarefulRobot(IMailDelivery delivery, IMailPool mailPool) {
 		super(delivery, mailPool, true, MAX_ITEMS);
 		// TODO Auto-generated constructor stub

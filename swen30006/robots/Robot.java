@@ -1,4 +1,4 @@
-package robot;
+package robots;
 
 import exceptions.ExcessiveDeliveryException;
 import exceptions.ItemTooHeavyException;

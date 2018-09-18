@@ -1,4 +1,4 @@
-package robot;
+package robots;
 
 import automail.IMailDelivery;
 import exceptions.FragileItemBrokenException;

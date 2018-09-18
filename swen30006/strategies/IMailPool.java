@@ -2,7 +2,7 @@ package strategies;
 
 import automail.MailItem;
 import exceptions.FragileItemBrokenException;
-import robot.Robot;
+import robots.Robot;
 
 /**
  * addToPool is called when there are mail items newly arrived at the building to add to the MailPool or
