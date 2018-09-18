@@ -1,5 +1,7 @@
 package strategies;
 
+import java.util.ArrayList;
+
 import automail.IMailDelivery;
 import robots.BigRobot;
 import robots.CarefulRobot;
@@ -12,7 +14,7 @@ public class Automail {
     public Robot[] robot;
     public IMailPool mailPool;
     
-    public Automail(IMailPool mailPool, IMailDelivery delivery) {
+    public Automail(IMailPool mailPool, IMailDelivery delivery, ArrayList<String> robotStrings) {
     	// Swap between simple provided strategies and your strategies here
     	    	
     	/** Initialize the MailPool */
@@ -24,12 +26,20 @@ public class Automail {
     	boolean strong = true; // Can handle any weight that arrives at the building
     	
     	/** Initialize robots */
-    	robot = new Robot[4];
-    	robot[0] = new BigRobot(delivery, mailPool);
-    	robot[1] = new CarefulRobot(delivery, mailPool);
-    	robot[2] = new StandardRobot(delivery, mailPool);
-    	robot[3] = new WeakRobot(delivery, mailPool);
-    	
+    	robot = new Robot[robotStrings.size()];
+    	int i = 0;
+    	for (String type: robotStrings) {
+    		if (type.equals("Big")) {
+    			robot[i] = new BigRobot(delivery, mailPool);
+    		} else if (type.equals("Careful")) {
+    			robot[i] = new CarefulRobot(delivery, mailPool); 
+    		} else if (type.equals("Standard")) {
+    			robot[i] = new StandardRobot(delivery, mailPool);
+    		} else if (type.equals("Weak")) {
+    			robot[i] = new WeakRobot(delivery, mailPool);
+    		}
+    		i++;
+    	}
     }
     
 }

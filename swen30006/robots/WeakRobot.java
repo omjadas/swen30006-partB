@@ -8,7 +8,7 @@ import automail.MailItem;
 
 
 public class WeakRobot extends Robot {
-	private static final int MAX_ITEMS = 6;
+	private static final int MAX_ITEMS = 4;
 	private static final int MAX_WEIGHT = 2000;
 
 	public WeakRobot(IMailDelivery delivery, IMailPool mailPool) {
