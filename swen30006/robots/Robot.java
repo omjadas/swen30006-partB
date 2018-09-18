@@ -37,17 +37,17 @@ public abstract class Robot {
     /**
      * Initiates the robot's location at the start to be at the mailroom
      * also set it to be waiting for mail.
-     * @param behaviour governs selection of mail items for delivery and behaviour on priority arrivals
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
      * @param strong is whether the robot can carry heavy items
+     * @param maxTake is the number of items the robot can carry at once
      */
-    public Robot(IMailDelivery delivery, IMailPool mailPool, boolean strong, int MAX_TAKE){
+    public Robot(IMailDelivery delivery, IMailPool mailPool, boolean strong, int maxTake){
     	id = "R" + hashCode();
         // current_state = RobotState.WAITING;
     	current_state = RobotState.RETURNING;
         current_floor = Building.MAILROOM_LOCATION;
-        tube = new StorageTube(MAX_TAKE);
+        tube = new StorageTube(maxTake);
         this.delivery = delivery;
         this.mailPool = mailPool;
         this.receivedDispatch = false;
@@ -123,6 +123,8 @@ public abstract class Robot {
 
     /**
      * Sets the route for the robot
+     * For weak robot, ItemTooHeavyException may be thrown if weight > 2000
+     * subclasses extend this method
      */
     protected void setRoute() throws ItemTooHeavyException{
         /** Pop the item from the StorageUnit */
@@ -134,6 +136,7 @@ public abstract class Robot {
     /**
      * Generic function that moves the robot towards the destination
      * @param destination the floor towards which the robot is moving
+     * subclasses extend this method
      */
     protected void moveTowards(int destination) throws FragileItemBrokenException {
         if (deliveryItem != null && deliveryItem.getFragile() || !tube.isEmpty() && tube.peek().getFragile()) throw new FragileItemBrokenException();

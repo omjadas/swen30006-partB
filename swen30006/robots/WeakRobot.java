@@ -1,12 +1,13 @@
 package robots;
 
 import automail.IMailDelivery;
-import exceptions.FragileItemBrokenException;
 import exceptions.ItemTooHeavyException;
 import strategies.IMailPool;
-import automail.MailItem;
 
-
+/**
+ * Weak robot is able to carry 4 items at once
+ * The max weight the robot can carry is 2000
+ */
 public class WeakRobot extends Robot {
 	private static final int MAX_ITEMS = 4;
 	private static final int MAX_WEIGHT = 2000;
@@ -18,6 +19,8 @@ public class WeakRobot extends Robot {
 	
 	/**
      * Sets the route for the robot
+     * if the item given to this robot is larger than 2000, 
+     * a ItemTooHeavyException is thrown
      */
     protected void setRoute() throws ItemTooHeavyException{
     	/** Pop the item from the StorageUnit */
@@ -27,6 +30,10 @@ public class WeakRobot extends Robot {
 	    destination_floor = deliveryItem.getDestFloor();
     }
     
+	/**
+     * to retrieve the max weight for the weak robot
+     * This mechanism is implemented to avoid using magic numbers in other functions
+     */
     public static int getMaxWeight() {
     	return MAX_WEIGHT;
     }

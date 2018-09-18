@@ -3,8 +3,6 @@ package strategies;
 import java.util.LinkedList;
 import java.util.Comparator;
 import java.util.ListIterator;
-import java.util.function.Consumer;
-
 import automail.MailItem;
 import automail.PriorityMailItem;
 import automail.StorageTube;
@@ -23,6 +21,7 @@ public class MyMailPool implements IMailPool {
 		MailItem mailItem;
 		// Use stable sort to keep arrival time relative positions
 		
+		// check the properties of each item
 		public Item(MailItem mailItem) {
 			priority = (mailItem instanceof PriorityMailItem) ? ((PriorityMailItem) mailItem).getPriorityLevel() : 1;
 			heavy = mailItem.getWeight() >= WeakRobot.getMaxWeight();
@@ -49,6 +48,13 @@ public class MyMailPool implements IMailPool {
 		}
 	}
 	
+    /**
+     * separate pool into normalPool and fragilePool
+     * @param normalPool contains all mails that are normal
+     * @param fragilePool contains all mails that are fragile, only careful robot is able to access this pool
+     * @param robots is a list of robots in the simulation
+     * @param lightCount is the number of light mails in the normalPool
+     */
 	private LinkedList<Item> normalPool;
 	private LinkedList<Item> fragilePool;
 	private LinkedList<Robot> robots;
@@ -62,6 +68,11 @@ public class MyMailPool implements IMailPool {
 		robots = new LinkedList<Robot>();
 	}
 
+	/**
+	 * mailItems are added to the pool based on if they are fragile. 
+	 * Record the number of light items contained in the normalPool.
+	 * Sort the priorities of the pools based on the ItemComparator()
+	 */
 	public void addToPool(MailItem mailItem) {
 		Item item = new Item(mailItem);
 		if (item.fragile) {
@@ -80,11 +91,20 @@ public class MyMailPool implements IMailPool {
 		for (Robot robot: (Iterable<Robot>) robots::iterator) { fillStorageTube(robot); }
 	}
 	
+	/**
+	 * fill the storage tube with the max it can carry
+	 * first check if the robot is a careful robot and if there are items in the fragile pool
+	 * if the robot is careful and there is something in the fragile pool, then give one fragile item to the robot
+	 * if either of the condition is not met, check if robot is weak
+	 * if not weak, fill the robot tube with the max items from normalPool
+	 * if weak, give items to the robot while keeping tracking the number of light items.
+	 * Eventually, dispatch the robot
+	 */
 	private void fillStorageTube(Robot robot) throws FragileItemBrokenException {
 		StorageTube tube = robot.getTube();
 
 
-		try { // Get as many items as available or as fit
+		try {
 			
 			if (robot instanceof CarefulRobot && fragilePool.size()>0) {
 				tube.addItem(fragilePool.remove().mailItem);

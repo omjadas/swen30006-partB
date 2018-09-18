@@ -2,8 +2,11 @@ package robots;
 
 import automail.IMailDelivery;
 import exceptions.FragileItemBrokenException;
-import exceptions.ItemTooHeavyException;
 import strategies.IMailPool;
+
+/**
+ * careful robot is able to carry 3 normal items or 1 fragile item at once
+ */
 
 public class CarefulRobot extends Robot{
 	private static final int MAX_ITEMS = 3;
@@ -17,6 +20,7 @@ public class CarefulRobot extends Robot{
      * Generic function that moves the robot towards the destination
      * @param destination the floor towards which the robot is moving
      * @throws FragileItemBrokenException 
+     * The robot stop once for every step()
      */
     protected void moveTowards(int destination) throws FragileItemBrokenException {
 	    //skips one step

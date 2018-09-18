@@ -2,28 +2,33 @@ package automail;
 
 import exceptions.FragileItemBrokenException;
 import exceptions.TubeFullException;
-import robots.Robot;
-
 import java.util.Stack;
 
 /**
  * The storage tube carried by the robot.
  */
 public class StorageTube {
-
-    public int MAXIMUM_CAPACITY;
-    public Stack<MailItem> tube;
+	/**
+     * @param MAXIMUM_CAPACITY record the max items a robot can carry 
+     * @param tube contains a stack of mails
+     */
+    public int MAXIMUM_CAPACITY; 
+    public Stack<MailItem> tube; 
 
     /**
      * Constructor for the storage tube
+     * define the max capacity for each robot
      */
     public StorageTube(int maxTake){
         this.tube = new Stack<MailItem>();
-        this.MAXIMUM_CAPACITY = maxTake;
+        this.MAXIMUM_CAPACITY = maxTake; 
     }
     
-    public int getMaxCapacity() {
-    	return MAXIMUM_CAPACITY;
+    /**
+     * @return the max capacity for each robot
+     */
+    public int getMaxCapacity() { 
+    	return MAXIMUM_CAPACITY; 
     }
 
     /**

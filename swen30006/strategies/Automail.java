@@ -21,11 +21,10 @@ public class Automail {
     	
     	this.mailPool = mailPool;
     	
-        /** Initialize the RobotAction */
-    	boolean weak = false;  // Can't handle more than 2000 grams
-    	boolean strong = true; // Can handle any weight that arrives at the building
-    	
-    	/** Initialize robots */
+    	/** 
+    	 * Initialize robots 
+    	 * reads robot information from properties file
+    	 */
     	robot = new Robot[robotStrings.size()];
     	int i = 0;
     	for (String type: robotStrings) {

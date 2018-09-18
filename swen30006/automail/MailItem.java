@@ -3,7 +3,6 @@ package automail;
 import java.util.Map;
 import java.util.TreeMap;
 
-// import java.util.UUID;
 
 /**
  * Represents a mail item
@@ -26,6 +25,7 @@ public class MailItem {
      * @param dest_floor the destination floor intended for this mail item
      * @param arrival_time the time that the mail arrived
      * @param weight the weight of this mail item
+     * @param fragile if the item is fragile
      */
     public MailItem(int dest_floor, int arrival_time, int weight, boolean fragile){
         this.destination_floor = dest_floor;
