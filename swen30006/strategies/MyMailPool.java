@@ -12,6 +12,10 @@ import robots.Robot;
 import robots.WeakRobot;
 import exceptions.FragileItemBrokenException;
 
+/**
+ * Group 40
+ *
+ */
 public class MyMailPool implements IMailPool {
 	private class Item {
 		int priority;

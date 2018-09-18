@@ -6,6 +6,7 @@ import strategies.IMailPool;
 
 /**
  * careful robot is able to carry 3 normal items or 1 fragile item at once
+ * Group 40
  */
 
 public class CarefulRobot extends Robot{

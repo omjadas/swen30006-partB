@@ -2,12 +2,18 @@ package strategies;
 
 import java.util.ArrayList;
 
+
 import automail.IMailDelivery;
 import robots.BigRobot;
 import robots.CarefulRobot;
 import robots.Robot;
 import robots.StandardRobot;
 import robots.WeakRobot;
+
+/**
+ * Group 40
+ *
+ */
 
 public class Automail {
 	      

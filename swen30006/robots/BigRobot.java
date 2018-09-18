@@ -6,6 +6,7 @@ import strategies.IMailPool;
 
 /**
  * Big robot is able to carry 6 items at once
+ * Group 40
  */
 
 public class BigRobot extends Robot{

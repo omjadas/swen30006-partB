@@ -7,6 +7,7 @@ import strategies.IMailPool;
 /**
  * Weak robot is able to carry 4 items at once
  * The max weight the robot can carry is 2000
+ * Group 40
  */
 public class WeakRobot extends Robot {
 	private static final int MAX_ITEMS = 4;
