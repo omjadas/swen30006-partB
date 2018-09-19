@@ -106,37 +106,40 @@ public class MyMailPool implements IMailPool {
 	 */
 	private void fillStorageTube(Robot robot) throws FragileItemBrokenException {
 		StorageTube tube = robot.getTube();
-
-
+		StorageTube temp = new StorageTube(tube.MAXIMUM_CAPACITY);
 		try {
 			
-			if (robot instanceof CarefulRobot && fragilePool.size()>0) {
-				tube.addItem(fragilePool.remove().mailItem);
-			}else {
+			if (robot instanceof CarefulRobot && fragilePool.size() > 0) {
+				temp.addItem(fragilePool.remove().mailItem);
+			} else {
 				if (robot.isStrong()) {
-					while(tube.getSize() < tube.getMaxCapacity() && !normalPool.isEmpty() ) {
+					while (temp.getSize() < temp.getMaxCapacity() && !normalPool.isEmpty()) {
 						Item item = normalPool.remove();
-						if (!item.heavy) lightCount--;
-						tube.addItem(item.mailItem);
+						if (!item.heavy)
+							lightCount--;
+						temp.addItem(item.mailItem);
 					}
 				} else {
 					ListIterator<Item> i = normalPool.listIterator();
-					while(tube.getSize() < tube.getMaxCapacity() && lightCount > 0) {
+					while (temp.getSize() < temp.getMaxCapacity() && lightCount > 0) {
 						Item item = i.next();
 						if (!item.heavy) {
-							tube.addItem(item.mailItem);
+							temp.addItem(item.mailItem);
 							i.remove();
 							lightCount--;
 						}
 					}
+				}
+				if (temp.getSize() > 0) {
+					while (!temp.isEmpty()) tube.addItem(temp.pop());
+					robot.dispatch();
 				}
 			}
 
 			if (tube.getSize() > 0) {
 				robot.dispatch();
 			}
-		}
-		catch(TubeFullException e){
+		} catch (TubeFullException e) {
 			e.printStackTrace();
 		}
 	}
