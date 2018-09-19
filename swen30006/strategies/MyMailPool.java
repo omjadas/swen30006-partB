@@ -130,10 +130,10 @@ public class MyMailPool implements IMailPool {
 						}
 					}
 				}
-				if (temp.getSize() > 0) {
-					while (!temp.isEmpty()) tube.addItem(temp.pop());
-					robot.dispatch();
-				}
+			}
+			if (temp.getSize() > 0) {
+				while (!temp.isEmpty()) tube.addItem(temp.pop());
+				robot.dispatch();
 			}
 
 			if (tube.getSize() > 0) {
