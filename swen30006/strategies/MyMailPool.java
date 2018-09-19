@@ -102,6 +102,7 @@ public class MyMailPool implements IMailPool {
 	 * if either of the condition is not met, check if robot is weak
 	 * if not weak, fill the robot tube with the max items from normalPool
 	 * if weak, give items to the robot while keeping tracking the number of light items.
+	 * A temp variable is implemented so that the dilivery order can be perserved
 	 * Eventually, dispatch the robot
 	 */
 	private void fillStorageTube(Robot robot) throws FragileItemBrokenException {
@@ -133,10 +134,6 @@ public class MyMailPool implements IMailPool {
 			}
 			if (temp.getSize() > 0) {
 				while (!temp.isEmpty()) tube.addItem(temp.pop());
-				robot.dispatch();
-			}
-
-			if (tube.getSize() > 0) {
 				robot.dispatch();
 			}
 		} catch (TubeFullException e) {
