@@ -1,2 +1,2 @@
-# swen30006_partB
+# swen30006-partB
 Mailbot simulation implementation
